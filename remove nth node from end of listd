@@ -1,0 +1,20 @@
+class Solution:
+    def removeNthFromEnd(self, train_head: ListNode, n: int) -> ListNode:
+        # Add the helper car at the front
+        helper_car = ListNode(0)
+        helper_car.next = train_head
+        # First walk: count the cars
+        train_length = 0
+        counter = train_head
+        while counter is not None:
+            train_length += 1
+            counter = counter.next
+        # Figure out how many steps to take to reach the car before the one to remove
+        steps_to_target = train_length - n
+        walker = helper_car
+        while steps_to_target > 0:
+            steps_to_target -= 1
+            walker = walker.next
+        # Remove the target car
+        walker.next = walker.next.next
+        return helper_car.next
