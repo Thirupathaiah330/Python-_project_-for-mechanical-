@@ -1,0 +1,23 @@
+class Solution:
+    def nextPermutation(self, nums: List[int]) -> None:
+        n = len(nums)
+        r = n - 2
+
+        # find the pivot
+        while r >= 0 and nums[r] >= nums[r + 1]:
+            r -= 1
+
+        if r == -1:
+            nums.reverse()
+            return
+
+        # find the element which is just larger than nums[r]
+        i = n - 1
+        while nums[i] <= nums[r]:
+            i -= 1
+
+        # swap
+        nums[r], nums[i] = nums[i], nums[r]
+
+        # reverse suffix
+        nums[r+1:] = reversed(nums[r+1:])
