@@ -1,0 +1,21 @@
+class Solution:
+    def trap(self, height: List[int]) -> int:
+        left, right = 0, len(height) - 1
+        maxright, maxleft = 0,0
+        area = 0
+
+        while left< right:
+            if height[left] < height[right]:
+                if maxleft < height[left]:
+                    maxleft = height[left]
+                else:
+                    area += maxleft - height[left]
+                left += 1
+            else:
+                if maxright < height[right]:
+                    maxright = height[right]
+                else:
+                    area += maxright - height[right]
+                right -= 1
+        
+        return area
