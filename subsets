@@ -1,0 +1,15 @@
+class Solution:
+    def subsets(self, nums: List[int]) -> List[List[int]]:
+        self.ans=list()
+        self.constructor(nums, [], 0)
+        return self.ans
+
+    def constructor(self, nums: List[int], selected: List[int], index: int) -> None:
+        if index==len(nums):
+            self.ans.append(selected.copy())
+            return
+        self.constructor(nums, selected, index+1)
+        selected.append(nums[index])
+        self.constructor(nums, selected, index+1)
+        selected.pop()
+        return
