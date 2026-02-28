@@ -1,0 +1,16 @@
+class Solution:
+    def canJump(self, nums: List[int]) -> bool:
+        max_reachable = 0
+        n = len(nums)
+        # if we cannot move anywhere from start and the length of the array exceeds 1 then return false
+        if nums[0] == 0 and n > 1:
+            return False
+        for i in range(0, n):
+            # if at any point we can reach the last index of the array
+            if max_reachable >= n - 1:
+                return True
+            # if at any point we reach an index that is unreachable
+            if i > max_reachable:
+                return False
+            # Update max_reachable to be the maximum of (itself vs current index + maximum jumps possible from that index)
+            max_reachable = max(max_reachable, i + nums[i])
